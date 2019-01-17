@@ -79,7 +79,7 @@ console.log(lastCar.car_make, lastCar.car_model);
 let carModels = [];
 
 for (let i = 0; i < inventory.length; i++) {
-    let earliestModel = inventory[i].car_model;
+    let earliestModel = null;
     for (let j = 0; j < inventory.length; j++) {
         let currModel = inventory[j].car_model;
         let alreadyUsed = false;
@@ -91,14 +91,28 @@ for (let i = 0; i < inventory.length; i++) {
         if (alreadyUsed) {
             continue;
         }
-        if (currModel < earliestModel) {
+        if (earliestModel === null || currModel.toLowerCase() < earliestModel.toLowerCase()) {
             earliestModel = currModel;
         }
     }
-    carModels.push(earliestModel);
+    if (earliestModel) {
+        carModels.push(earliestModel);
+    }
 }
 
 console.log(carModels);
+
+let carModels2 = inventory.sort(
+    function (a, b) {
+        if (a.car_model.toLowerCase() > b.car_model.toLowerCase()) {
+            return 1;
+        }
+        if (a.car_model.toLowerCase() < b.car_model.toLowerCase()) {
+            return -1;
+        }
+    }
+).map(function(x) { return x.car_model; });
+console.log(carModels2);
 
 // ==== Challenge 4 ====
 // The accounting team needs all the years from every car on the lot. Create a new array from the dealer data containing only the car years and log the result in the console.
