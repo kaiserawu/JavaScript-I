@@ -77,29 +77,29 @@ console.log(lastCar.car_make, lastCar.car_model);
 // The marketing team wants the car models listed alphabetically on the website. Sort all the car model names into alphabetical order and log the results in the console
 
 let carModels = [];
-
+let orderedCars = [];
 for (let i = 0; i < inventory.length; i++) {
-    let earliestModel = null;
+    let earliestCar = null;
     for (let j = 0; j < inventory.length; j++) {
-        let currModel = inventory[j].car_model;
+        let currCar = inventory[j];
         let alreadyUsed = false;
-        for (let k = 0; k < carModels.length; k++) {
-            if (carModels[k] === currModel) {
+        for (let k = 0; k < orderedCars.length; k++) {
+            if (orderedCars[k] === currCar) {
                 alreadyUsed = true;
             }
         }
         if (alreadyUsed) {
             continue;
         }
-        if (earliestModel === null || currModel.toLowerCase() < earliestModel.toLowerCase()) {
-            earliestModel = currModel;
+        if (earliestCar === null || currCar.car_model.toLowerCase() <= earliestCar.car_model.toLowerCase()) {
+            earliestCar = currCar;
         }
     }
-    if (earliestModel) {
-        carModels.push(earliestModel);
+    if (earliestCar) {
+        orderedCars.push(earliestCar);
+        carModels.push(earliestCar.car_model);
     }
 }
-
 console.log(carModels);
 
 let carModels2 = inventory.sort(
